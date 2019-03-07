@@ -1,22 +1,12 @@
-#
-# This is the server logic of a Shiny web application. You can run the 
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-# 
-#    http://shiny.rstudio.com/
-#
+
 
 library(shiny)
 
 
-# Define server logic required to draw a histogram
+### The server.R for the interactive map app
 server <- function(input, output) {
-   
 
-    
-    
-    illinoismap<- leaflet() %>%
+    interactiveMap<- leaflet() %>%
       setView(lng = -77.0369, lat = 38.9072, zoom = 5) %>% 
       addTiles(group = "OSM (default)") %>%
       addProviderTiles("Stamen.Toner", group = "Toner") %>%
@@ -37,11 +27,9 @@ server <- function(input, output) {
       addEasyButton(easyButton(
         icon="fa-crosshairs", title="Locate Me",
         onClick=JS("function(btn, map){ map.locate({setView: true}); }")))
-    # addLegend("bottomright",values = ~TOT_POP,pal = pal6,title = "Population by County")
-    
-    output$interactivemap <- renderLeaflet(illinoismap)
-    
-    
+
+    output$interactivemap <- renderLeaflet(interactiveMap)
+
     
   }
   
